@@ -25,6 +25,7 @@ class VideosViewController: UICollectionViewController {
         super.viewDidLoad()
         
         refresh()
+        setScope()
         setSearch()
     }
     
@@ -89,17 +90,62 @@ extension VideosViewController: UISearchResultsUpdating {
     }
     
     
+    
     func updateSearchResults(for searchController: UISearchController) {
         
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+        let searchText = searchController.searchBar.text
         
-            dataSource = Video.allVideos.filter({ video -> Bool in
-                return video.name.lowercased().contains(searchText.lowercased())
-            })
-        } else {
+        let searchBar = searchController.searchBar
+        let selectedCategoryName = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        let category = VideoCateory(rawValue: selectedCategoryName)
+        
+        search(searchText!, category: category)
+    }
+    
+}
+
+
+
+
+extension VideosViewController: UISearchBarDelegate {
+    
+    
+    func setScope() {
+    
+        self.searchController.searchBar.scopeButtonTitles = VideoCateory.allCases.map({ $0.name })
+        self.searchController.searchBar.delegate = self
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        let selectedTitle = searchBar.scopeButtonTitles![selectedScope]
+        let category = VideoCateory(rawValue: selectedTitle)
+        search(searchBar.text!, category: category)
+    }
+}
+
+
+
+
+extension VideosViewController {
+    
+    
+    func search(_ text: String, category: VideoCateory?) {
+        
+        let searchText = text.lowercased()
+        dataSource = Video.allVideos.filter({ video -> Bool in
             
-            dataSource = Video.allVideos
-        }
+            let isCategoryMatching = category == .All || video.category == category
+            if searchText.isEmpty {
+               
+                return isCategoryMatching
+            } else {
+                
+                let isSearchMatching = video.name.lowercased().contains(searchText)
+                return isCategoryMatching && isSearchMatching
+            }
+        })
         refresh()
     }
 }
