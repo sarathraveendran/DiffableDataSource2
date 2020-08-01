@@ -1,0 +1,71 @@
+[
+  {
+    "id": "s1",
+    "name": "SwiftUI",
+    "books": [
+      {
+        "id": "1",
+        "name": "SwiftUI",
+        "image": "swiftui"
+      }
+    ]
+  },
+  {
+    "id": "s2",
+    "name": "DS",
+    "books": [
+      {
+        "id": "2",
+        "name": "Data Structures & Algorithms in Swift",
+        "image": "datastructures"
+      }
+    ]
+  },
+  {
+    "id": "s3",
+    "name": "UIKit",
+    "books": [
+      {
+        "id": "3",
+        "name": "Beginning ARKit",
+        "image": "arkit"
+      },
+      {
+        "id": "4",
+        "name": "Machine Learning in iOS",
+        "image": "machinelearning"
+      },
+      {
+        "id": "5",
+        "name": "Demystifying Views in iOS",
+        "image": "views"
+      },
+      {
+        "id": "6",
+        "name": "Push Notifications",
+        "image": "notifications"
+      },
+      {
+        "id": "7",
+        "name": "Reproducing Popular iOS Controls",
+        "image": "controls"
+      }
+    ]
+  },
+  {
+    "id": "s4",
+    "name": "Frameworks",
+    "books": [
+      {
+        "id": "8",
+        "name": "Fastlane for iOS",
+        "image": "fastlane"
+      },
+      {
+        "id": "9",
+        "name": "Beginning RxSwift",
+        "image": "rxswift"
+      }
+    ]
+  }
+]
