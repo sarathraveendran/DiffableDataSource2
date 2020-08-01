@@ -14,6 +14,7 @@ struct TextBook: Decodable {
     let id: String
     let name: String
     let image: String
+    var isLovedOne: Bool? = false
 }
 
 
@@ -24,12 +25,13 @@ extension TextBook: Hashable {
     func hash(into hasher: inout Hasher) {
         
         hasher.combine(id)
+        hasher.combine(isLovedOne)
     }
     
     
     static func == (lhs: TextBook, rhs: TextBook) -> Bool {
         
-        lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.isLovedOne == rhs.isLovedOne
     }
 }
 

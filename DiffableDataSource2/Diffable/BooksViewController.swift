@@ -16,7 +16,7 @@ class BooksViewController: UICollectionViewController {
     
     
     // MARK: Custm Types
-    typealias DiffableDataSource = UICollectionViewDiffableDataSource<Section, TextBook>
+    typealias DiffableDataSource = BooksDiffableDataSource
     
     
     
@@ -64,6 +64,7 @@ extension BooksViewController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
             cell.data = book
+            cell.delegate = self
             return cell
         }
         return dataSource
@@ -92,83 +93,3 @@ extension BooksViewController {
 
 
 
-
-
-extension BooksViewController: UISearchResultsUpdating {
-   
-    
-    func setSearchBar() {
-        
-        navigationItem.searchController = self.searchController
-        definesPresentationContext = true
-    }
-    
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        let searchText = searchController.searchBar.text
-        
-        let searchBar = searchController.searchBar
-        let categoryName = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        
-        search(searchText!, categoryName: categoryName)
-    }
-    
-}
-
-
-
-
-extension BooksViewController: UISearchBarDelegate {
-    
-    
-    func setScopeBar() {
-    
-        self.searchController.searchBar.scopeButtonTitles = Section.allBooks.map({ $0.name })
-        self.searchController.searchBar.delegate = self
-    }
-    
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        let categoryName = searchBar.scopeButtonTitles![selectedScope]
-        search(searchBar.text!, categoryName: categoryName)
-    }
-}
-
-
-
-
-extension BooksViewController {
-    
-    
-    func search(_ text: String, categoryName: String?) {
-        
-        let searchText = text.lowercased()
-        books = Section.allBooks.compactMap({ section -> Section? in
-
-            var _section = section
-            let isCategoryMatching = _section.name == categoryName
-            if !searchText.isEmpty {
-
-                let books = _section.books.filter { book -> Bool in
-                    
-                    let isSearchMatching = book.name.lowercased().contains(searchText)
-                    return isCategoryMatching && isSearchMatching
-                }
-                if books.count > 0 {
-                    
-                    _section.books = books
-                    return _section
-                }
-            } else if isCategoryMatching {
-                 
-                return _section
-            }
-
-            return nil
-        })
-        setData(true)
-    }
-}

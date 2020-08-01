@@ -37,21 +37,52 @@
                                                     <rect key="frame" x="8" y="8" width="366" height="177"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDH-N0-3Ru">
-                                                    <rect key="frame" x="8" y="193" width="366" height="20"/>
+                                                    <rect key="frame" x="8" y="193" width="328" height="20"/>
                                                     <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znF-vC-2pZ">
+                                                    <rect key="frame" x="304" y="8" width="70" height="30"/>
+                                                    <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="NtV-lb-n27"/>
+                                                        <constraint firstAttribute="width" constant="70" id="pgg-SS-ePi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="tintColor" red="0.77699917549999997" green="0.20979431270000001" blue="0.1786245108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Delete">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteAction:" destination="Dvm-5r-H20" eventType="touchUpInside" id="gAz-Rp-fsS"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ya2-Vl-lNw">
+                                                    <rect key="frame" x="344" y="188" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="MOS-LK-Xgf"/>
+                                                        <constraint firstAttribute="width" constant="30" id="Vyx-4E-4jg"/>
+                                                    </constraints>
+                                                    <state key="normal" image="heart"/>
+                                                    <connections>
+                                                        <action selector="loveAction:" destination="Dvm-5r-H20" eventType="touchUpInside" id="0la-Cg-AUD"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="ya2-Vl-lNw" firstAttribute="centerY" secondItem="fDH-N0-3Ru" secondAttribute="centerY" id="00Y-hj-9Sv"/>
                                                 <constraint firstItem="fDH-N0-3Ru" firstAttribute="top" secondItem="yNP-IQ-uvQ" secondAttribute="bottom" constant="8" id="2AG-2Q-zgG"/>
+                                                <constraint firstAttribute="trailing" secondItem="znF-vC-2pZ" secondAttribute="trailing" constant="8" id="FKe-nV-Num"/>
+                                                <constraint firstAttribute="trailing" secondItem="ya2-Vl-lNw" secondAttribute="trailing" constant="8" id="Lrl-G1-A6t"/>
                                                 <constraint firstItem="fDH-N0-3Ru" firstAttribute="leading" secondItem="4hz-ON-MGC" secondAttribute="leading" constant="8" id="Zn9-iW-m3N"/>
                                                 <constraint firstAttribute="trailing" secondItem="yNP-IQ-uvQ" secondAttribute="trailing" constant="8" id="cQH-4g-HD1"/>
                                                 <constraint firstItem="yNP-IQ-uvQ" firstAttribute="leading" secondItem="4hz-ON-MGC" secondAttribute="leading" constant="8" id="k9m-t1-hGU"/>
                                                 <constraint firstItem="yNP-IQ-uvQ" firstAttribute="top" secondItem="4hz-ON-MGC" secondAttribute="top" constant="8" id="qwF-8K-8f1"/>
-                                                <constraint firstAttribute="trailing" secondItem="fDH-N0-3Ru" secondAttribute="trailing" constant="8" id="raY-sl-zkA"/>
                                                 <constraint firstAttribute="bottom" secondItem="fDH-N0-3Ru" secondAttribute="bottom" constant="8" id="v7Q-P0-FrO"/>
+                                                <constraint firstItem="znF-vC-2pZ" firstAttribute="top" secondItem="4hz-ON-MGC" secondAttribute="top" constant="8" id="xpu-ku-wjg"/>
+                                                <constraint firstItem="ya2-Vl-lNw" firstAttribute="leading" secondItem="fDH-N0-3Ru" secondAttribute="trailing" constant="8" id="y3g-rq-boe"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -64,7 +95,8 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="414" height="225"/>
                                 <connections>
-                                    <outlet property="imageView" destination="yNP-IQ-uvQ" id="fI6-O4-yYT"/>
+                                    <outlet property="bookImageView" destination="yNP-IQ-uvQ" id="f36-gV-c6k"/>
+                                    <outlet property="loveButton" destination="ya2-Vl-lNw" id="SHV-5o-PIs"/>
                                     <outlet property="nameLabel" destination="fDH-N0-3Ru" id="amg-Wj-JkA"/>
                                 </connections>
                             </collectionViewCell>
@@ -78,9 +110,9 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCo-cB-vC9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="735" y="781"/>
+            <point key="canvasLocation" x="734.78260869565224" y="780.80357142857144"/>
         </scene>
-        <!--All New Table View-->
+        <!--Home-->
         <scene sceneID="MTz-T5-Mav">
             <objects>
                 <viewController id="zvu-5J-lbX" sceneMemberID="viewController">
@@ -128,7 +160,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OqL-sP-RBO"/>
                     </view>
-                    <navigationItem key="navigationItem" title="All New Table View" id="SYa-xS-w0o"/>
+                    <navigationItem key="navigationItem" title="Home" id="SYa-xS-w0o"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eon-VD-Fiz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,4 +257,7 @@
             <point key="canvasLocation" x="-928" y="29"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" width="100" height="100"/>
+    </resources>
 </document>
