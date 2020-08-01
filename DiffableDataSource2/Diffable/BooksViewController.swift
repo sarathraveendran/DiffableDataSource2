@@ -11,13 +11,16 @@ import UIKit
 
 
 
-
 class BooksViewController: UICollectionViewController {
+    
+    
+    // MARK: Connection Objects
+    @IBOutlet weak var emptyImageView: UIImageView!
+    
     
     
     // MARK: Custm Types
     typealias DiffableDataSource = BooksDiffableDataSource
-    
     
     
     // MARK: Props
@@ -60,6 +63,7 @@ extension BooksViewController {
     
     func createDataSource() -> DiffableDataSource {
         
+        // CELL
         let dataSource = DiffableDataSource(collectionView: self.collectionView) { (collectionView, indexPath, book) -> UICollectionViewCell? in
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
@@ -67,6 +71,18 @@ extension BooksViewController {
             cell.delegate = self
             return cell
         }
+        dataSource.delegate = self
+        
+        // HEADER
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "BookSectionHeaderViewCell", for: indexPath) as! BookSectionHeaderViewCell
+            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            view.data = section.name
+            return view
+        }
+        
         return dataSource
     }
     
@@ -93,3 +109,10 @@ extension BooksViewController {
 
 
 
+extension BooksViewController: BooksEmptyDelegate {
+    
+    func showEmptyView(_ isHidden: Bool) {
+        
+        self.emptyImageView.isHidden = isHidden
+    }
+}

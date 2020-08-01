@@ -9,16 +9,29 @@
 import Foundation
 import UIKit
 
-/*
- * Out of the box, the diffable data source is pretty plain.
- * But since it conforms to UITableViewDataSource it can do anything you might be already doing in your current UITableViewDataSource implementation.
- * All you need to do is define your own UITableViewDiffableDataSource and override the methods of features you want to implement
- */
 
 
+protocol BooksEmptyDelegate: class {
+    
+    func showEmptyView(_ isHidden: Bool)
+}
 
 
 class BooksDiffableDataSource: UICollectionViewDiffableDataSource<Section, TextBook> {
- 
-   
+    
+    
+    weak var delegate: BooksEmptyDelegate?
+    
+    
+    override func apply(_ snapshot: NSDiffableDataSourceSnapshot<Section, TextBook>, animatingDifferences: Bool = true, completion: (() -> Void)? = nil) {
+        super.apply(snapshot, animatingDifferences: animatingDifferences, completion: completion)
+     
+        delegate?.showEmptyView(!snapshot.itemIdentifiers.isEmpty)
+    }
 }
+
+
+
+/*  A worth to reading tut found at
+ *  https://www.swiftjectivec.com/diffable-datasource-empty-view/
+ */
