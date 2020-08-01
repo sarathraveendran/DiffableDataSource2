@@ -24,3 +24,4 @@ class BookSectionHeaderViewCell: UICollectionReusableView {
         }
     }
 }
+

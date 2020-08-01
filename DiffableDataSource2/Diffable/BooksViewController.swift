@@ -116,3 +116,14 @@ extension BooksViewController: BooksEmptyDelegate {
         self.emptyImageView.isHidden = isHidden
     }
 }
+
+
+
+extension BooksViewController {
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let selectionSection = dataSource.itemIdentifier(for: indexPath) else { return }
+        // Here you go with your selection
+    }
+}
