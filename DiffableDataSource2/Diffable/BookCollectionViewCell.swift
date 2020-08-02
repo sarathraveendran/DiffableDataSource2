@@ -65,3 +65,10 @@ extension BookCollectionViewCell {
         delegate?.love(self.data!)
     }
 }
+
+
+
+
+class BookCollectionViewCellType2: BookCollectionViewCell {
+    
+}

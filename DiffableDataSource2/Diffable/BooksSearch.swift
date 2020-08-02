@@ -86,7 +86,7 @@ extension BooksViewController {
 
             return nil
         })
-        setData(true)
+        setData(animate: true)
     }
 }
 

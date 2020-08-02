@@ -34,7 +34,7 @@ extension BooksViewController: BookDelegate {
             return _section
         }
         self.books = updatedBooks
-        setData(true)
+        setData(animate: true)
     }
 }
 

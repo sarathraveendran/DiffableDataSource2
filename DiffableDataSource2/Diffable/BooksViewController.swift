@@ -42,7 +42,7 @@ class BooksViewController: UICollectionViewController {
         
         setScopeBar()
         setSearchBar()
-        setData(false)
+        setData(animate: false)
     }
     
     
@@ -66,10 +66,19 @@ extension BooksViewController {
         // CELL
         let dataSource = DiffableDataSource(collectionView: self.collectionView) { (collectionView, indexPath, book) -> UICollectionViewCell? in
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
-            cell.data = book
-            cell.delegate = self
-            return cell
+            if indexPath.section == 2 {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCellType2", for: indexPath) as! BookCollectionViewCellType2
+                cell.data = book
+                cell.delegate = self
+                return cell
+            } else {
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
+                cell.data = book
+                cell.delegate = self
+                return cell
+            }
         }
         dataSource.delegate = self
         
@@ -88,7 +97,7 @@ extension BooksViewController {
     
     
     
-    func setData(_ animate: Bool) {
+    func setData(animate: Bool) {
         
         var snapShot = NSDiffableDataSourceSnapshot<Section, TextBook>()
         
@@ -125,5 +134,31 @@ extension BooksViewController {
         
         guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
         // Here you go with your selection
+    }
+}
+
+
+
+
+/* This is conventional approach. We have all new compositional layout now.
+ * Following this approach to reduce complexity and easy undertanding.
+ */
+extension BooksViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if indexPath.section == 2 {
+            
+             let width = UIScreen.main.bounds.width
+            let size = CGSize(width: width, height: 100)
+            return size
+        } else {
+           
+
+            let width = UIScreen.main.bounds.width
+            let height = (width * 3) / 4
+            let size = CGSize(width: width, height: ceil(height))
+            return size
+        }
     }
 }
